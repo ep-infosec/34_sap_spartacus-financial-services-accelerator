@@ -1,0 +1,8 @@
+<ng-container *ngIf="component$ | async as component">
+  <span
+    class="fs-tab"
+    (click)="onTabClicked(component.messageGroup, component.title)"
+    [ngClass]="{ 'active tabActive': active }"
+    >{{ component.title }}</span
+  >
+</ng-container>

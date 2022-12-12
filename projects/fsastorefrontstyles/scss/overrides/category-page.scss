@@ -1,0 +1,104 @@
+cx-page-layout.FSCategoryPageTemplate {
+  cx-page-slot > * {
+    display: flex;
+  }
+  .Section1 {
+    padding: 0;
+    max-width: 100%;
+  }
+  .Section2,
+  .Section3 {
+    cx-fs-cms-custom-container {
+      border: 1px solid var(--cx-color-4);
+      @include fs-box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
+      padding: 0;
+    }
+  }
+  .Section2 {
+    cx-fs-cms-custom-container {
+      @include heading-style;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem 1rem;
+      cx-paragraph p {
+        font-size: var(--cx-h4-font-size);
+      }
+      cx-link a {
+        font-weight: var(--cx-font-weight-semi);
+        text-transform: uppercase;
+        color: var(--cx-color-primary);
+        font-size: var(--cx-title-font-size);
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .Section3 {
+    cx-banner,
+    cx-paragraph {
+      flex: 0 1 50%;
+    }
+    cx-banner {
+      @include media-breakpoint-down(sm) {
+        flex: 1 1 100%;
+        flex-direction: column;
+      }
+    }
+    cx-fs-cms-custom-container {
+      @include media-breakpoint-down(sm) {
+        flex-direction: column;
+      }
+      cx-paragraph {
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        text-align: left;
+        @include media-breakpoint-down(sm) {
+          padding: 2rem;
+          text-align: center;
+        }
+        & > p {
+          margin-bottom: 0;
+        }
+      }
+    }
+    cx-fs-cms-custom-container.category-inner-container {
+      flex: 1 1 50%;
+      justify-content: center;
+      cx-paragraph {
+        @include media-breakpoint-down(sm) {
+          padding: 1rem;
+        }
+      }
+      cx-link {
+        padding: 0 2rem;
+        font-size: var(--cx-title-font-size);
+        font-weight: var(--cx-font-weight-semi);
+        color: var(--cx-color-primary);
+        text-transform: uppercase;
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .Section4 {
+    cx-fs-cms-custom-container {
+      text-align: left;
+      justify-content: center;
+      margin: 0 -0.5rem;
+      box-shadow: none;
+      padding: 0;
+      @include media-breakpoint-down(md) {
+        flex-wrap: wrap;
+      }
+      @include media-breakpoint-down(xs) {
+        margin: 0;
+      }
+    }
+  }
+}

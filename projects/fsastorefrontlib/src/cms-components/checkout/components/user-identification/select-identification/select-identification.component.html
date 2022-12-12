@@ -1,0 +1,51 @@
+<div class="row py-3">
+  <ng-container *ngFor="let identificationType of identificationTypes">
+    <div class="col-12 col-md-4 text-center mb-3">
+      <div
+        class="p-5 border pointer box-shadow"
+        (click)="setSelectedType(identificationType)"
+        [ngClass]="{
+          'selected border border-color-primary':
+            identificationType.name === this.selected
+        }"
+      >
+        <div
+          class="mb-4 fs-icon"
+          [ngClass]="
+            identificationType.name === this.selected
+              ? 'icon-ok'
+              : this.identificationType.icon
+          "
+        ></div>
+        <p class="my-2 semi-bold">
+          {{
+            'fscommon.userIdentification.' + this.identificationType.name
+              | cxTranslate
+          }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div class="border-top border-color-3 my-3"></div>
+<div class="row mt-5">
+  <div class="col-md-6 mb-3">
+    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+      ><button
+        class="action-button btn-block"
+        (click)="navigateBack(previousCheckoutStep)"
+      >
+        {{ 'common.back' | cxTranslate }}
+      </button></ng-container
+    >
+  </div>
+  <div class="col-md-6">
+    <button
+      class="primary-button btn-block"
+      (click)="setIdentificationType()"
+      [disabled]="!selected"
+    >
+      {{ 'common.continue' | cxTranslate }}
+    </button>
+  </div>
+</div>

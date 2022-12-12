@@ -1,0 +1,17 @@
+%cx-fs-category-feature {
+  display: flex;
+  .category-feature-wrapper {
+    @include fs-box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
+    .category-feature-text {
+      color: var(--cx-color-text);
+      padding: 2rem;
+      p {
+        margin-bottom: 0.5rem;
+      }
+    }
+    .title {
+      font-weight: var(--cx-font-weight-semi);
+      text-transform: uppercase;
+    }
+  }
+}

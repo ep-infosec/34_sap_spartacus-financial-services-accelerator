@@ -1,0 +1,23 @@
+.item-details {
+  li {
+    text-indent: -1.3rem;
+    margin-left: 1.3rem;
+    margin-bottom: 0.5rem;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    &:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: 0.6rem;
+      border-bottom: 3px solid var(--cx-color-primary);
+      margin-right: 0.6rem;
+    }
+  }
+}
+.HeaderLinks nav > .wrapper {
+  @include media-breakpoint-down(lg) {
+    right: 0.5rem;
+  }
+}

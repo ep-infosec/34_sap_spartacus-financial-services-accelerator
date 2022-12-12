@@ -1,0 +1,47 @@
+<form name="form" #form="ngForm">
+  <label class="checkbox-label">
+    <input type="checkbox" name="readAndAgree" ngModel required />
+    {{ 'fscommon.legal.readAndAgree' | cxTranslate }}
+    <span class="checkbox-text fs-icon icon-ok"></span>
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="actOnMyBehalf" ngModel required />
+    {{ 'fscommon.legal.actOnOwnBehalf' | cxTranslate }}
+    <span class="checkbox-text fs-icon icon-ok"></span>
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="usePersonalData" ngModel required />
+    {{ 'fscommon.legal.usePersonalData' | cxTranslate }}
+    <span class="checkbox-text fs-icon icon-ok"></span>
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="authorizedToAccept" ngModel required />
+    {{ 'fscommon.legal.iAmAuthorized' | cxTranslate }}
+    <span class="checkbox-text fs-icon icon-ok"></span>
+  </label>
+  <div class="row mt-5">
+    <div class="col-md-6 mb-3">
+      <ng-container
+        *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+        ><button
+          class="action-button btn-block"
+          (click)="navigateBack(previousCheckoutStep)"
+        >
+          {{ 'common.back' | cxTranslate }}
+        </button></ng-container
+      >
+    </div>
+    <div class="col-md-6">
+      <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep">
+        <button
+          [disabled]="!form.valid"
+          class="primary-button btn-block"
+          type="button"
+          (click)="navigateNext(nextCheckoutStep, form?.form)"
+        >
+          {{ 'common.continue' | cxTranslate }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</form>

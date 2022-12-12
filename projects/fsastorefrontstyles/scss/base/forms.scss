@@ -1,0 +1,14 @@
+// Global form errors and warnings
+.ng-invalid.ng-touched {
+  border-color: var(--cx-color-danger);
+  &:focus {
+    outline-color: var(--cx-color-danger);
+  }
+}
+.form-text {
+  color: var(--cx-color-danger);
+}
+.label-content {
+  font-weight: var(--cx-font-weight-semi);
+  text-transform: uppercase;
+}

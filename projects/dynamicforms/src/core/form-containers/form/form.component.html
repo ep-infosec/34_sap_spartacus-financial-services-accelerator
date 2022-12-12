@@ -1,0 +1,13 @@
+<h3 class="form-title">
+  {{ formSubject }}
+</h3>
+<ng-container *ngIf="formConfig !== undefined">
+  <cx-dynamic-form
+    class="dynamic-form container"
+    #form="cx-dynamicForm"
+    [config]="formConfig"
+    (submit)="submit($event)"
+    [formData]="formData"
+  >
+  </cx-dynamic-form>
+</ng-container>

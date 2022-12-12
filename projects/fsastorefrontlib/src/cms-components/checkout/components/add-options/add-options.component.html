@@ -1,0 +1,177 @@
+<div class="box-shadow">
+  <div class="row no-gutters">
+    <h2 class="col-12 section-header-heading text-center">
+      {{ 'fscommon.addOptions' | cxTranslate }}
+    </h2>
+  </div>
+  <ng-container *ngIf="isCartStable$ | async; else loading">
+    <ng-container *ngIf="entries$ | async as entries">
+      <ng-container
+        *ngFor="
+          let orderEntryData of entries
+            | slice: 1
+            | cxSortByName: 'product':'name'
+        "
+      >
+        <div
+          class="row mx-3 py-3 no-gutters position-relative"
+          *ngIf="orderEntryData.product"
+        >
+          <div class="tooltip-wrapper">
+            <div
+              class="fs-tooltip"
+              [ngbTooltip]="tooltipContent"
+              triggers="click:blur"
+              placement="left"
+            >
+              i
+            </div>
+          </div>
+          <ng-template #tooltipContent>
+            <span>{{ orderEntryData.product?.description }}</span>
+            <ng-container
+              *ngIf="
+                orderEntryData.product.displayClassifications &&
+                orderEntryData.product.classifications as classifications
+              "
+            >
+              <hr />
+              <div
+                class="row no-gutters mb-2"
+                *ngFor="let feature of classifications[0].features"
+              >
+                <span class="short-overview-title col-6 text-left">{{
+                  feature.name
+                }}</span>
+                <span class="short-overview-value col-6 text-right">{{
+                  feature.featureValues[0]?.value
+                }}</span>
+              </div>
+            </ng-container>
+          </ng-template>
+          <div class="col-12 col-md-2 align-self-center">
+            <cx-media
+              class="cx-product-image-container"
+              [container]="orderEntryData.product?.images?.PRIMARY"
+            >
+            </cx-media>
+          </div>
+          <div class="col-12 col-md-7 align-self-center">
+            <h6>{{ orderEntryData.product.name }}</h6>
+          </div>
+          <div class="col-12 col-md-3 align-self-center text-center">
+            <ng-container
+              *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
+            >
+              <ng-container
+                *ngIf="orderEntryData.product?.bundleTemplates?.length == 3"
+              >
+                {{ 'fscommon.included' | cxTranslate }}
+              </ng-container>
+              <ng-container
+                *ngIf="orderEntryData.product?.bundleTemplates?.length !== 3"
+              >
+                {{ 'fscommon.notAvailableFull' | cxTranslate }}
+              </ng-container>
+            </ng-container>
+            <ng-container
+              *ngIf="!orderEntryData.removeable && orderEntryData.addable"
+            >
+              <button
+                (click)="
+                  addProductToCart(
+                    orderEntryData.product?.code,
+                    orderEntryData.entryNumber
+                  )
+                "
+                class="secondary-button btn-block text-capitalize"
+              >
+                {{ 'fscommon.add' | cxTranslate }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="orderEntryData.removeable">
+              <button
+                (click)="removeProductFromCart(orderEntryData)"
+                class="secondary-button btn-block text-capitalize"
+              >
+                {{ 'common.remove' | cxTranslate }}
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container
+        *ngIf="
+          entries[0].product.displayClassifications &&
+          entries[0].product?.classifications
+        "
+      >
+        <div class="row mx-3 py-3 no-gutters">
+          <div class="col-12 col-md-2 align-self-center">
+            <cx-media
+              class="cx-product-image-container"
+              [container]="entries[0].product?.images?.PRIMARY"
+            ></cx-media>
+          </div>
+          <div class="col-12 col-md-5 align-self-center">
+            <h6>
+              {{ 'fscommon.coveredWith' | cxTranslate }}
+              {{ entries[0].product?.cartDisplayName }}
+            </h6>
+          </div>
+          <div class="col-12 col-md-5 align-self-center text-center">
+            <ng-container
+              *ngFor="
+                let feature of (entries[0].product?.classifications)[0]
+                  ?.features
+              "
+            >
+              <div class="row no-gutters mb-2">
+                <div class="col-7 text-left normal-weight">
+                  {{ feature.name }}
+                </div>
+                <div class="col-5 text-right normal-weight">
+                  {{
+                    feature.featureValues[0]?.value | currency: currentCurrency
+                  }}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="isCartStable$ | async">
+  <div class="row mt-5">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <ng-container
+        *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+        ><button
+          class="action-button btn-block"
+          (click)="navigateBack(previousCheckoutStep)"
+        >
+          {{ 'common.back' | cxTranslate }}
+        </button></ng-container
+      >
+    </div>
+    <div class="col-md-6">
+      <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+        ><button
+          class="primary-button btn-block"
+          type="button"
+          data-checkout-url=""
+          (click)="navigateNext(nextCheckoutStep)"
+        >
+          {{ 'common.continue' | cxTranslate }}
+        </button></ng-container
+      >
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

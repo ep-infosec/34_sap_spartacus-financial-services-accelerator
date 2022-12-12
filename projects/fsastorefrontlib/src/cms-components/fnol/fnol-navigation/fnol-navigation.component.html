@@ -1,0 +1,23 @@
+<section *ngIf="claimRequest$ | async as claimRequest">
+  <div class="row mt-3 justify-content-end">
+    <div *ngIf="activeStepIndex !== 0" class="col-sm-6 col-xs-12 mb-3">
+      <button class="action-button btn-block" (click)="back(activeStepIndex)">
+        {{ 'common.back' | cxTranslate }}
+      </button>
+    </div>
+    <div
+      *ngIf="activeStepIndex !== getNumberOfConfigurationSteps()"
+      class="col-md-6 col-sm-6 col-xs-12"
+    >
+      <button
+        class="primary-button btn-block"
+        (click)="next(activeStepIndex, claimRequest)"
+      >
+        {{
+          (activeStepData.summaryStep ? 'fscommon.submit' : 'common.continue')
+            | cxTranslate
+        }}
+      </button>
+    </div>
+  </div>
+</section>

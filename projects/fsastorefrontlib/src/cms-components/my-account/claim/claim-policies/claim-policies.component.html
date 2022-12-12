@@ -1,0 +1,51 @@
+<ng-container *ngIf="claimData$ | async as claimData">
+  <ng-container *ngIf="claimPoliciesLoaded$ | async; else loading">
+    <ng-container
+      *ngIf="
+        claimData.claimPoliciesData?.insurancePolicies?.length > 0;
+        else noClaims
+      "
+    >
+      <div class="row">
+        <div
+          class="cx-payment-card col-sm-12 col-md-6"
+          *ngFor="
+            let claimPolicy of claimData.claimPoliciesData?.insurancePolicies;
+            let i = index
+          "
+        >
+          <div
+            class="cx-payment-card-inner"
+            [ngClass]="{ active: selectedIndex === i }"
+          >
+            <cx-card
+              [border]="true"
+              [fitToContainer]="true"
+              [content]="cardContent(i, claimPolicy) | async"
+              (sendCard)="
+                selectPolicy(
+                  i,
+                  claimPolicy.policyNumber,
+                  claimPolicy.contractNumber
+                )
+              "
+            ></cx-card>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noClaims>
+  <div class="text-center">
+    <div class="image-wrapper d-inline-block">
+      <img class="image-item" [src]="getImagelink()" alt="" />
+    </div>
+    <h6 class="notice py-4 m-0">
+      {{ 'policy.noValidPolicies' | cxTranslate }}
+    </h6>
+  </div>
+</ng-template>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

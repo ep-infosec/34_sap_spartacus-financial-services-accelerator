@@ -1,0 +1,25 @@
+<ng-container *ngIf="tabs?.length > 0; else noMessages">
+  <ul role="tablist" class="nav-tabs d-none d-md-flex">
+    <li
+      class="tab"
+      *ngFor="let tab of tabs; let i = index"
+      (click)="activeTabIndex = i"
+    >
+      <cx-fs-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+      </cx-fs-inbox-tab>
+    </li>
+  </ul>
+</ng-container>
+<ng-container *ngIf="initialGroupName">
+  <cx-fs-inbox-messages
+    [mobileTabs]="tabs"
+    [mobileInitialTab]="mobileGroupTitle"
+    [initialGroup]="initialGroupName"
+  >
+  </cx-fs-inbox-messages>
+</ng-container>
+<ng-template #noMessages>
+  <h1 class="mt-5 mb-3 text-center">
+    {{ 'fscommon.noMessages' | cxTranslate }}
+  </h1>
+</ng-template>

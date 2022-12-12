@@ -1,0 +1,90 @@
+@import '../fs-mixins';
+@import '../theme';
+
+cx-page-layout {
+  & > cx-page-slot:not(.has-components) {
+    display: none;
+  }
+  &.FSRequestPageTemplate,
+  &.MultiTabsCategoryPageTemplate,
+  &.MultiStepCheckoutSummaryPageTemplate,
+  &.FSCategoryPageTemplate,
+  &.CheckoutPageTemplate,
+  &.GeneralPageTemplate,
+  &.SearchResultsListPageTemplate {
+    padding: 0;
+    & > cx-page-slot {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 0 1.5rem;
+    }
+  }
+  &.MultiStepCheckoutSummaryPageTemplate {
+    @include media-breakpoint-up(lg) {
+      display: flex;
+    }
+    max-width: 1140px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    cx-page-slot {
+      &.TopContent {
+        flex: 0 100%;
+      }
+      &.BodyContent {
+        flex: 0 63%;
+      }
+      &.SideContent {
+        flex: 0 0 35%;
+        flex-direction: row;
+        align-content: flex-start;
+      }
+    }
+  }
+}
+
+// TODO: Keep until we refactor the way we implement HTML content in impex files!
+.TopContent cx-paragraph p {
+  margin-bottom: 0;
+}
+
+header,
+main,
+footer {
+  &.mouse-focus {
+    outline: 0;
+  }
+}
+
+.alert {
+  .close {
+    width: inherit;
+    margin: inherit;
+    right: 3rem;
+    top: var(--cx-top, 22%);
+  }
+}
+cx-spinner {
+  width: 100%;
+  padding: 1rem;
+  .loader {
+    border-left-color: var(--cx-color-primary);
+  }
+}
+cx-fs-cms-custom-container {
+  @include fs-box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+  padding: 3rem;
+  @include media-breakpoint-down(md) {
+    padding: 2rem;
+  }
+  // Temporary solution, untill forms are wrapped in different container component
+  .MultiStepCheckoutSummaryPageTemplate .BodyContent &,
+  .MultiStepCheckoutSummaryPageTemplate .SideContent &,
+  .CheckoutPageTemplate .BottomContent & {
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+cx-global-message {
+  z-index: 3;
+}

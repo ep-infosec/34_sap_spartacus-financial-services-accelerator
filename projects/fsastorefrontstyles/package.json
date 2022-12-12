@@ -1,0 +1,26 @@
+{
+  "name": "@spartacus/fsa-styles",
+  "version": "2.0.0",
+  "author": "FSA",
+  "repository": "https://github.com/SAP/spartacus-financial-services-accelerator/tree/develop/projects/fsastorefrontstyles",
+  "description": "FSA Style library containing global styles",
+  "homepage": "https://github.com/SAP/spartacus-financial-services-accelerator",
+  "keywords": [
+    "spartacus",
+    "fsa",
+    "styles"
+  ],
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "sass": "^1.25.0"
+  },
+  "peerDependencies": {
+    "bootstrap": "4.5.0"
+  },
+  "dependencies": {
+    "hamburgers": "1.1.3"
+  }
+}

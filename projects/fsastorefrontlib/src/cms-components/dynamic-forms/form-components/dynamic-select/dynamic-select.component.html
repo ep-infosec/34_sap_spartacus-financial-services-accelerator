@@ -1,0 +1,31 @@
+<ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'dynamicforms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <select
+        class="form-control"
+        [attr.name]="config.name"
+        [formControlName]="config.name"
+      >
+        <option [selected]="true" disabled value="null">{{
+          'dynamicforms.pleaseSelect' | cxTranslate
+        }}</option>
+        <option
+          *ngFor="let option of options$ | async as options"
+          value="{{ option.name }}"
+        >
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>

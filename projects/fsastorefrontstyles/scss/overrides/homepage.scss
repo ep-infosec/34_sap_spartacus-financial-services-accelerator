@@ -1,0 +1,86 @@
+@import '../fs-mixins';
+@import '../theme';
+
+.LandingPageTemplate {
+  main cx-page-slot:not(.Section1) {
+    @include contentWidth();
+    padding: 3rem 1.5rem 0 1.5rem;
+  }
+
+  // Carousel & Homepage headings
+  cx-fs-category-carousel h2 {
+    @include headline-style;
+    padding: 1rem 0;
+    margin: 1rem auto 3rem;
+    text-align: center;
+  }
+
+  //Get a quote section
+  .Section1 cx-paragraph {
+    margin-top: 6rem;
+    @include media-breakpoint-down(xs) {
+      margin-top: 60px;
+    }
+  }
+
+  .Section2 {
+    cx-paragraph {
+      color: var(--cx-color-text);
+      width: 100%;
+      padding: 0 15px;
+      margin-bottom: 60px;
+    }
+  }
+
+  // Need analysis entry point section
+  .Section3 {
+    .homepage-questionnaire {
+      border-radius: 2.5rem;
+      background-color: var(--cx-color-light);
+      font-size: var(--cx-h5-font-size);
+      cx-generic-link {
+        display: inline-block;
+        padding: 0 4rem;
+      }
+      cx-generic-link a {
+        font-weight: var(--cx-font-weight-semi);
+      }
+      &::before,
+      &::after {
+        @include vertical-center;
+        font-family: 'Font Awesome 5 Free', sans-serif;
+        font-weight: 900;
+        content: '\f061';
+        background-color: var(--cx-color-1);
+        color: var(--cx-color-primary);
+        border-radius: 50%;
+        padding: 10px;
+        width: 3rem;
+      }
+      &::before {
+        left: 0.5rem;
+      }
+      &::after {
+        right: 0.5rem;
+        transform: translateY(-50%) rotateZ(180deg);
+      }
+    }
+  }
+
+  //Assistance and support section
+  .Section4 {
+    cx-banner {
+      padding: 0 0 1.5rem;
+      @include media-breakpoint-up(md) {
+        padding: 0 1rem;
+        flex: 1 1 50%;
+      }
+      cx-media {
+        overflow: hidden;
+      }
+      img:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}

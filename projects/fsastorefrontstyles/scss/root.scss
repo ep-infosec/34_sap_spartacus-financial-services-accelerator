@@ -1,0 +1,22 @@
+@import 'theme';
+
+:root {
+  @each $color, $value in $theme-colors {
+    --cx-color-#{$color}: #{$value};
+  }
+
+  --cx-h1-font-size: #{$h1-font-size};
+  --cx-h2-font-size: #{$h2-font-size};
+  --cx-h3-font-size: #{$h3-font-size};
+  --cx-h4-font-size: #{$h4-font-size};
+  --cx-h5-font-size: #{$h5-font-size};
+  --cx-h6-font-size: #{$h6-font-size};
+  --cx-title-font-size: #{$title-font-size};
+  --cx-text-font-size: #{$font-size-base};
+  --cx-xs-font-size: #{$xs-font-size};
+
+  --cx-font-weight-light: #{$font-weight-light};
+  --cx-font-weight-normal: #{$font-weight-normal};
+  --cx-font-weight-semi: #{$font-weight-semi};
+  --cx-font-weight-bold: #{$font-weight-bold};
+}

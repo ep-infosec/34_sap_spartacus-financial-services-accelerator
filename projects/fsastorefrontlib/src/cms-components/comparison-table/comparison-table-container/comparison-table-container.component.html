@@ -1,0 +1,27 @@
+<div class="products-wrapper justify-content-around mb-2">
+  <ng-container *ngIf="availableTabs$ | async as availableTabs">
+    <ng-container *ngIf="tabs.length > 0">
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <ng-container *ngFor="let tabElement of availableTabs; let i = index">
+          <li
+            ngbNavItem
+            [ngbNavItem]="i"
+            [ngClass]="{ 'd-none': availableTabs.length === 1 }"
+          >
+            <a ngbNavLink> {{ tabElement.title }}</a>
+            <ng-template ngbNavContent>
+              <ng-template
+                [cxComponentWrapper]="{
+                  flexType: 'CMSComparisonTabComponent',
+                  uid: tabElement.uid
+                }"
+              >
+              </ng-template>
+            </ng-template>
+          </li>
+        </ng-container>
+        <div [ngbNavOutlet]="nav"></div>
+      </ul>
+    </ng-container>
+  </ng-container>
+</div>
